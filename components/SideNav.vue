@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import firebase from '~/plugins/firebase';
 export default
     {
         data() {
@@ -39,6 +40,15 @@ export default
                 }
                 this.$store.dispatch('posts/store', sendData);
                 this.text = "";
+            },
+            logout() {
+                firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                        alert('ログアウトが完了しました')
+                        this.$router.replace('/')
+                    })
             },
         },
     }
